@@ -1,0 +1,9 @@
+[user]
+	email = eliastsatiris@gmail.com
+	name = Ilias Tsatiris
+[core]
+	editor = vim
+[push]
+	default = upstream
+[merge]
+	conflictstyle = diff3
