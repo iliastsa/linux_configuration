@@ -37,7 +37,7 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'vim-syntastic/syntastic'
 Plugin 'kien/ctrlp.vim'
 Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline_themes'
+Plugin 'vim-airline/vim-airline-themes'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'christoomey/vim-tmux-navigator'
 
@@ -61,7 +61,7 @@ map <F10> :NERDTreeToggle<CR>
 
 "Vim airline
 set laststatus=2
-set ttimeoutlen=50
+set ttimeoutlen=50 
 let g:airline_theme = 'solarized' 
 let g:airline#extensions#branch#enabled=1
 let g:airline_powerline_fonts = 1
@@ -69,11 +69,12 @@ let g:airline_powerline_fonts = 1
 "Vim theme
 syntax on
 set background=dark
+set t_Co=256
 colorscheme solarized
 
 "YouCompleteMe
-let g:ycm_register_as_syntastic_checker = 1
-let g:ycm_enable_diagnostic_signs = 1
-let g:ycm_always_populate_location_list = 1
-let g:ycm_confirm_extra_conf = 0
-let g:ycm_autoclose_preview_window_after_insertion = 1
+"let g:ycm_register_as_syntastic_checker = 1
+"let g:ycm_enable_diagnostic_signs = 1
+"let g:ycm_always_populate_location_list = 1
+"let g:ycm_confirm_extra_conf = 0
+"let g:ycm_autoclose_preview_window_after_insertion = 1

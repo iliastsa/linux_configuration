@@ -8,6 +8,7 @@ HOME=${HOME}
 PWD=`pwd`
 OH_MY_ZSH=${HOME}"/.oh-my-zsh"
 VIM=${HOME}"/.vim"
+VUNDLE=${HOME}"/.vim/bundle/Vundle.vim"
 
 # Check if software requirements are met
 
@@ -79,12 +80,24 @@ config_pip(){
     ln -sf ${PWD}/.pip/pip.conf ${HOME}/.pip/pip.conf
 }
 
+config_nvim(){
+    if [ -d .config/nvim/init.vim]; then
+        echo "nvim is already configured"
+    else
+        echo "Creating nvim config directory"
+        mkdir -p ${HOME}/.config/nvim/
+        echo "Creating init.vim"
+        cp ${PWD}/init.vim ${HOME}/.config/nvim/.
+    fi
+}
+
 run(){
     check_software_req
     install_oh_my_zsh
     install_vundle
     create_synlinks
     config_zsh
-    config_pip
     config_tmux
 }
+
+run
