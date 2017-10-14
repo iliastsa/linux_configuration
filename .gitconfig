@@ -2,7 +2,7 @@
 	email = eliastsatiris@gmail.com
 	name = Ilias Tsatiris
 [core]
-	editor = vim
+	editor = nvim
 [push]
 	default = upstream
 [merge]

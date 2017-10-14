@@ -21,21 +21,22 @@ check_software_req(){
     done
 }
 
-create_synlinks(){
+create_symlinks(){
     dotfiles=(".bashrc" ".zshrc" ".tmux.conf" ".vimrc" ".gitconfig" ".config/nvim/init.vim")
     for dotfile in "${dotfiles[@]}"
     do
         ln -sf ${PWD}/${dotfile} ${HOME}/${dotfile}
         echo "Created symlink ${HOME}/${dotfile}"
     done
+
+    ln -sf ${PWD}/.vimrc ${HOME}/.config/nvim/init.vim
+    echo "Created init.vim symlink"
 }
 
 install_oh_my_zsh(){
     if [ -d "${OH_MY_ZSH}" ]; then
         cd "${OH_MY_ZSH}"
         echo "Changed directory to `pwd`"
-        echo "${OH_MY_ZSH} exists. Git pull to update..."
-        git pull
         cd - > /dev/null 2>&1
         echo "Change directory back to `pwd`"
     else
@@ -48,8 +49,6 @@ install_vundle(){
     if [ -d "${VUNDLE}" ]; then
         cd "${VUNDLE}"
         echo "Changing directory to `pwd`"
-        echo "${VUNDLE} exists. Git pull to update..."
-        git pull
         cd - > /dev/null 2>&1
         echo "Changing directory back to `pwd`"
     else
@@ -86,8 +85,6 @@ config_nvim(){
     else
         echo "Creating nvim config directory"
         mkdir -p ${HOME}/.config/nvim/
-        echo "Creating init.vim"
-        cp ${PWD}/init.vim ${HOME}/.config/nvim/.
     fi
 }
 
@@ -95,9 +92,10 @@ run(){
     check_software_req
     install_oh_my_zsh
     install_vundle
-    create_synlinks
+    config_nvim
     config_zsh
     config_tmux
+    create_symlinks
 }
 
 run
