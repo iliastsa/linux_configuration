@@ -13,6 +13,8 @@ if filereadable("/etc/vim/vimrc.local")
   source /etc/vim/vimrc.local
 endif
 
+set mouse=a
+
 "Relative line numbering
 set relativenumber
 set number
@@ -60,7 +62,6 @@ let g:syntastic_check_on_wq = 0
 "NERDTree
 map <F10> :NERDTreeToggle<CR>
 
-
 "Vim airline
 set laststatus=2
 set ttimeoutlen=50 
@@ -80,3 +81,4 @@ let g:ycm_enable_diagnostic_signs = 1
 let g:ycm_always_populate_location_list = 1
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_autoclose_preview_window_after_insertion = 1
+let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
