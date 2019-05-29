@@ -16,7 +16,6 @@ endif
 set mouse=a
 
 "Relative line numbering
-set relativenumber
 set number
 
 "Misc. spacing configs
@@ -43,7 +42,8 @@ Plugin 'vim-airline/vim-airline-themes'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'tpope/vim-fugitive'
-Plugin 'Valloric/YouCompleteMe.git'
+Plugin 'souffle-lang/souffle.vim'
+" Plugin 'Valloric/YouCompleteMe.git'
 
 call vundle#end()
 
@@ -72,13 +72,13 @@ let g:airline_powerline_fonts = 1
 "Vim theme
 syntax on
 set background=dark
-set t_Co=256
+
 colorscheme solarized
 
 "YouCompleteMe
-let g:ycm_register_as_syntastic_checker = 1
-let g:ycm_enable_diagnostic_signs = 1
-let g:ycm_always_populate_location_list = 1
-let g:ycm_confirm_extra_conf = 0
-let g:ycm_autoclose_preview_window_after_insertion = 1
-let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
+"let g:ycm_register_as_syntastic_checker = 1
+"let g:ycm_enable_diagnostic_signs = 1
+"let g:ycm_always_populate_location_list = 1
+"let g:ycm_confirm_extra_conf = 0
+"let g:ycm_autoclose_preview_window_after_insertion = 1
+"let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
