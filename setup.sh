@@ -1,56 +1,69 @@
-# Software requirements:
-#   - zsh
+#!/bin/bash
+
+# Software dependencies:
 #   - tmux
 #   - nvim
 #   - git
 
 HOME=${HOME}
 PWD=`pwd`
-VIM=${HOME}"/.vim"
-VUNDLE=${HOME}"/.vim/bundle/Vundle.vim"
+DEPS=("nvim" "tmux" "git")
 
-# Check if software requirements are met
+# Check if all software dependencies are installed
+for sw in "${DEPS[@]}"
+do
+    type ${sw} > /dev/null 2>&1 ||
+        { echo "ERROR: **${sw}** is not installed!"; exit 1; }
+done
 
-check_software_req(){
-    software=("tmux" "git")
-    for sw in "${software[@]}"
-    do
-        type ${sw} > /dev/null 2>&1 ||
-                { echo "ERROR: **${sw}** is not installed!"; exit 1; }
-    done
-}
+# Create symlinks to the repo files
+symlinks=(${HOME}/".tmux.conf" ${HOME}/".config/nvim/init.vim" ${HOME}/".bashrc")
 
-create_symlinks(){
-    dotfiles=(".tmux.conf" ".vimrc" ".bashrc")
-    for dotfile in "${dotfiles[@]}"
-    do
-        ln -sf ${PWD}/${dotfile} ${HOME}/${dotfile}
-        echo "Created symlink ${HOME}/${dotfile}"
-    done
-}
+# Create .envrc if it doesn't exist
+if [ -f .envrc ]; then
+    echo "Enviroment variable file already exists."
+else
+    echo "Creating empty .envrc"
+    touch ${HOME}/.envrc
+fi
 
-install_vundle(){
-    if [ -d "${VUNDLE}" ]; then
-        cd "${VUNDLE}"
-        echo "Changing directory to `pwd`"
-        cd - > /dev/null 2>&1
-        echo "Changing directory back to `pwd`"
+# Create .dircolors.256dark if it doesn't already exist
+if [ -f .dircolors.256dark ]; then
+    echo "Dircolors file already exists"
+else
+    echo "Creating .dircolors.256dark file"
+    cp ${PWD}/.dircolors.256dark ${HOME}/.dircolors.256dark
+fi
+
+for symlink in "${symlinks[@]}"
+do
+    if [ -h $symlink ]; then
+        echo "Symlink ${symlink} already exists."
     else
-        echo "${VUNDLE} not exists. Git clone to create..."
-        git clone https://github.com/gmarik/Vundle.vim.git ${VUNDLE}
-        vim +PluginInstall +qall
+        echo "Creating symlink ${symlink}."
+
+        if [ -f $symlink ]; then
+            echo "A file with that name already exists. Backing it up as $(basename ${symlink}).bak"
+            cp ${symlink} ${symlink}".bak"
+        fi
+
+        ln -sf ${PWD}/$(basename ${symlink}) ${HOME}/${symlink}
     fi
-}
+done
 
-config_tmux(){
-    echo "Creating symlink ${HOME}/.tmux.sh"
-    ln -sf ${PWD}/.tmux.sh ${HOME}/.tmux.sh
-}
+# Prepare nvim config folder
+echo "Preparing config directories for nvim."
+mkdir -p ${HOME}/.config/nvim
 
-run(){
-    install_vundle
-    config_tmux
-    create_symlinks
-}
+# Install Vimplug
+VIMPLUG=${HOME}"/.local/share/nvim/site/autoload/plug.vim"
 
-run
+if [ -f $VIMPLUG ]; then
+    echo "Vimplug already installed."
+else
+    echo "Installing Vimplug..."
+    curl -fLo ${HOME}/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+fi
+
+# Install nvim plugins
+nvim --headless +PlugInstall +qa
