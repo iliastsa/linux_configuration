@@ -40,6 +40,8 @@ Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'souffle-lang/souffle.vim'
 Plug 'Valloric/YouCompleteMe'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'tomlion/vim-solidity'
 call plug#end()
 
 "Colorscheme
