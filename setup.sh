@@ -28,10 +28,13 @@ else
 fi
 
 # Create .dircolors.256dark if it doesn't already exist
-if [ -f .dircolors.256dark ]; then
+if [ -f ${HOME}/Config/.dircolors.256dark ]; then
     echo "Dircolors file already exists"
 else
     echo "Creating .dircolors.256dark file"
+
+    mkdir -p ${HOME}/Config
+
     cp ${PWD}/.dircolors.256dark ${HOME}/.dircolors.256dark
 fi
 
@@ -47,7 +50,7 @@ do
             cp ${symlink} ${symlink}".bak"
         fi
 
-        ln -sf ${PWD}/$(basename ${symlink}) ${HOME}/${symlink}
+        ln -sf ${PWD}/$(basename ${symlink}) ${symlink}
     fi
 done
 
