@@ -23,6 +23,9 @@ set copyindent      " copy indent from the previous line
 "Searching
 set incsearch       " search as characters are entered
 set hlsearch        " highlight matche
+set ignorecase      " ignore case when searching
+set smartcase       " ignore case if search pattern is lower case
+                    " case-sensitive otherwise
 
 "Plugins
 call plug#begin()
