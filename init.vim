@@ -45,8 +45,8 @@ Plug 'souffle-lang/souffle.vim'
 Plug 'Valloric/YouCompleteMe'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'tomlion/vim-solidity'
+Plug 'dylon/vim-antlr'
 call plug#end()
-
 "Colorscheme
 set termguicolors
 set background=dark
