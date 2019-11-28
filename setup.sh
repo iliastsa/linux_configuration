@@ -16,8 +16,9 @@ do
         { echo "ERROR: **${sw}** is not installed!"; exit 1; }
 done
 
-# Create symlinks to the repo files
-symlinks=(${HOME}/".tmux.conf" ${HOME}/".config/nvim/init.vim" ${HOME}/".bashrc")
+# Prepare nvim config folder
+echo "Preparing config directories for nvim."
+mkdir -p ${HOME}/.config/nvim
 
 # Create .envrc if it doesn't exist
 if [ -f .envrc ]; then
@@ -38,6 +39,9 @@ else
     cp ${PWD}/.dircolors.256dark ${HOME}/.dircolors.256dark
 fi
 
+# Create symlinks to the repo files
+symlinks=(${HOME}/".tmux.conf" ${HOME}/".config/nvim/init.vim" ${HOME}/".bashrc")
+
 for symlink in "${symlinks[@]}"
 do
     if [ -h $symlink ]; then
@@ -53,10 +57,6 @@ do
         ln -sf ${PWD}/$(basename ${symlink}) ${symlink}
     fi
 done
-
-# Prepare nvim config folder
-echo "Preparing config directories for nvim."
-mkdir -p ${HOME}/.config/nvim
 
 # Install Vimplug
 VIMPLUG=${HOME}"/.local/share/nvim/site/autoload/plug.vim"
