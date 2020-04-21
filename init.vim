@@ -77,6 +77,9 @@ else
   call neomake#configure#automake('nw', 1000)
 endif
 
+let g:neomake_python_enabled_markers = []
+let g:neomake_python_exe = '/bin/python3'
+
 "Nerdtree
 map <C-n> :NERDTreeToggle<CR>
 let NERDTreeShowHidden = 1
@@ -133,3 +136,6 @@ nnoremap <c-h> <c-w><c-h>
 nnoremap <tab> :bn<CR>
 nnoremap <s-tab> :bp<CR>
 nnoremap <leader>bd :bd<CR>
+
+" ctags
+nnoremap <leader>. :CtrlPTag<cr>
